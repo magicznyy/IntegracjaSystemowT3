@@ -18,7 +18,13 @@ public class Main {
         printer.printTable(laptops);
         printer.printQuantity(laptops);
 
-
+        Converter converter = new Converter();
+        try {
+            converter.crerateXmlFile(laptops);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         Window window = new Window();
         window.welcomeScreen(laptops);
 
