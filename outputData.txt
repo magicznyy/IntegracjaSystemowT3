@@ -1,0 +1,2 @@
+Marka	Przekątna	Rozdzielczość	Typ matrycy	Czy dotykowa	Procesor	Liczba rdzeni	Taktowanie	ROM	Typ dysku	RAM	Karta graficzna	Pamięć GPU	System	Napęd	
+Dell		12"				matowa		false		intel i7		4		2800		240GB		SSD		8GB		intel HD Graphics 4000		1GB		Windows 7 Home		
