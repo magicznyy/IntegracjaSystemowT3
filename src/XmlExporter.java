@@ -10,14 +10,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 import java.io.OutputStream;
-import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Converter {
+public class XmlExporter {
 
     public void crerateXmlFile(ArrayList<Laptop>laptops) throws ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -71,7 +68,7 @@ public class Converter {
 
 
             Element disc = doc.createElement("disc");
-            disc.setAttribute("type", laptop.getDisc().getType());
+            disc.setAttribute("discType", laptop.getDisc().getType());
             rootElement2.appendChild(disc);
 
 
@@ -96,7 +93,7 @@ public class Converter {
 
 
 
-            Element screenType = doc.createElement("type");
+            Element screenType = doc.createElement("screenType");
             screenType.setTextContent(laptop.getScreen().getType());
 
             screen.appendChild(diagonal);
@@ -132,13 +129,13 @@ public class Converter {
             counter ++;
         }
             try {
-                writeXml(doc, System.out);
+                writeXml(doc, "outputData.xml");
             }
             catch(Exception e){
                 e.printStackTrace();
             }
     }
-    private static void writeXml(Document doc, OutputStream output) throws TransformerException {
+    private static void writeXml(Document doc, String s ) throws TransformerException {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
@@ -146,7 +143,7 @@ public class Converter {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(output);
+        StreamResult result = new StreamResult(s);
 
         transformer.transform(source, result);
 

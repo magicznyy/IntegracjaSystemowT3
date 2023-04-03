@@ -3,12 +3,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 
 import static java.awt.Component.LEFT_ALIGNMENT;
 
 public class Window {
 
+    public static ArrayList<Laptop> laptops;
 
+    public Window(ArrayList<Laptop> laptops) {
+        this.laptops = laptops;
+    }
 
     public static void welcomeScreen(ArrayList <Laptop> laptops) {
         JFrame frame = new JFrame("Welcome screen");
@@ -92,8 +97,12 @@ public class Window {
         button3.setText("Eksportuj do pliku xml");
         button3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                Exporter exporter = new Exporter();
-                exporter.exportDataFromJTable(jt,f);
+                XmlExporter xmlExporter = new XmlExporter();
+                try {
+                    xmlExporter.crerateXmlFile(laptops);
+                } catch (ParserConfigurationException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         JPanel panel=new JPanel();

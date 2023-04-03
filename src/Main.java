@@ -6,29 +6,33 @@ public class Main {
 
 
         File file = new File("data/data.txt");
+      File file2 = new File("outputData.xml");
         FileReader fileReader = new FileReader();
 
-        ArrayList<String> txtLaptops = fileReader.readFile(file);
-        ArrayList<Laptop> laptops = new ArrayList<>();
 
-        LaptopCreator laptopCreator = new LaptopCreator();
-        laptops = laptopCreator.createComputerSet(txtLaptops);
+//
+//        ArrayList<String> txtLaptops = fileReader.readTxtFile(file);
+//        ArrayList<Laptop> laptops = new ArrayList<>();
+//
+//        LaptopCreator laptopCreator = new LaptopCreator();
+//        laptops = laptopCreator.createComputerSet(txtLaptops);
+//
+//        Printer printer = new Printer();
+//        printer.printTable(laptops);
+//        printer.printQuantity(laptops);
+//
+//        Window window = new Window(laptops);
+//        window.welcomeScreen(laptops);
 
-        Printer printer = new Printer();
-        printer.printTable(laptops);
-        printer.printQuantity(laptops);
 
-        Converter converter = new Converter();
-        try {
-            converter.crerateXmlFile(laptops);
+        for (Laptop l: fileReader.readXmlFile(file2)
+             ) {
+            System.out.println(l.toString());
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        Window window = new Window();
-        window.welcomeScreen(laptops);
 
-
+        //TODO: change date in the main header
+        //TODO: fix disc type and isItTouchscreen
+        //TODO: all the rest
     }
 
 
