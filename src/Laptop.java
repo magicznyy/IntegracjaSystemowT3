@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Laptop {
 
@@ -61,7 +63,7 @@ public class Laptop {
         return driveName;
     }
 
-    public void laptopToStringArray(){
+    public List<String> laptopToStringArray(){
         String [] laptop = new String [15];
         laptop[0] = this.getBrand();
         laptop[1] = this.getScreen().getDiagonal();
@@ -80,6 +82,8 @@ public class Laptop {
         laptop[14]= this.getDriveName();
 
         this.laptopTxt = laptop;
+
+        return Arrays.asList(this.laptopTxt);
     }
 
     @Override

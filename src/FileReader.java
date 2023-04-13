@@ -54,9 +54,16 @@ public class FileReader {
                 if (node.getNodeType() == Node.ELEMENT_NODE)
                 {
                     Element eElement = (Element) node;
+                    Disc disc = new Disc();
 
-                        Disc disc = new Disc( eElement.getElementsByTagName("capacity").item(0).getTextContent(), eElement.getAttribute("discType"));
-                        GraphicCard graphicCard = new GraphicCard(eElement.getElementsByTagName("gpuName").item(0).getTextContent(),eElement.getElementsByTagName("gpuMemory").item(0).getTextContent());
+                        disc.setCapacity(eElement.getElementsByTagName("capacity").item(0).getTextContent());
+                    if(eElement.getAttributeNode("disc") !=  null )
+                        disc.setType(eElement.getAttributeNode("disc").toString());
+                    else
+                        disc.setType("brak");
+
+
+                    GraphicCard graphicCard = new GraphicCard(eElement.getElementsByTagName("gpuName").item(0).getTextContent(),eElement.getElementsByTagName("gpuMemory").item(0).getTextContent());
                         Processor processor = new Processor(eElement.getElementsByTagName("procName").item(0).getTextContent(), eElement.getElementsByTagName("coresNumber").item(0).getTextContent(), eElement.getElementsByTagName("clocking").item(0).getTextContent());
 
                         boolean touchScreen = false;
@@ -73,9 +80,24 @@ public class FileReader {
         {
             e.printStackTrace();
         }
-
         return laptops;
     }
+
+
+    public String[] createLaptopsArray(ArrayList<Laptop> laptops){
+
+        ArrayList <String> laptopsArr = new ArrayList<>();
+        laptopsArr.toArray();
+        for (Laptop l : laptops
+        ) {
+            laptopsArr.addAll(l.laptopToStringArray());
+        }
+
+        return (String[])laptopsArr.toArray();
+    }
+
+
+
 }
 
 

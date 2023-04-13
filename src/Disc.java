@@ -8,12 +8,23 @@ public class Disc {
                 this.type = type;
         }
 
+        public Disc() {
+        }
+
         public String getCapacity() {
                 return capacity;
         }
 
         public String getType() {
                 return type;
+        }
+
+        public void setCapacity(String capacity) {
+                this.capacity = capacity;
+        }
+
+        public void setType(String type) {
+                this.type = type;
         }
 
         @Override

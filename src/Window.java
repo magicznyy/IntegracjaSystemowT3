@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
@@ -63,7 +64,7 @@ public class Window {
             for (Laptop l:laptops
                  ) {
                 for(int i=0;i<15;i++)
-                data[counter][i] = l.getLaptopTxt()[i];
+                        data[counter][i] = l.getLaptopTxt()[i];
                 counter++;
 
             }
@@ -97,9 +98,25 @@ public class Window {
         button3.setText("Eksportuj do pliku xml");
         button3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+
+                Exporter exporter = new Exporter();
+                exporter.exportDataFromJTable(jt,f);
+
+                File file = new File("outputData.txt");
+                FileReader fileReader = new FileReader();
+
+                Formatter formatter = new Formatter();
+                File  formattedFile = formatter.formatOutputAsInput(file);
+
+                ArrayList<String> txtLaptops = fileReader.readTxtFile(formattedFile);
+                ArrayList<Laptop> laptopsPom= new ArrayList<>();
+
+                LaptopCreator laptopCreator = new LaptopCreator();
+                laptopsPom = laptopCreator.createComputerSet(txtLaptops);
+
                 XmlExporter xmlExporter = new XmlExporter();
                 try {
-                    xmlExporter.crerateXmlFile(laptops);
+                    xmlExporter.crerateXmlFile(laptopsPom);
                 } catch (ParserConfigurationException ex) {
                     throw new RuntimeException(ex);
                 }
