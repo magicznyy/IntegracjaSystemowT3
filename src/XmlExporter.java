@@ -70,12 +70,12 @@ public class XmlExporter {
 
 
             Element disc = doc.createElement("disc");
-            disc.setAttribute("discType", laptop.getDisc().getType());
+            disc.setAttribute("discType", laptop.getDisc().getCapacity());
             rootElement2.appendChild(disc);
 
 
             Element capacity = doc.createElement("capacity");
-            capacity.setTextContent(laptop.getDisc().getCapacity());
+            capacity.setTextContent(laptop.getDisc().getType());
             disc.appendChild(capacity);
 
 

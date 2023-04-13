@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileReader {
@@ -57,10 +58,12 @@ public class FileReader {
                     Disc disc = new Disc();
 
                         disc.setCapacity(eElement.getElementsByTagName("capacity").item(0).getTextContent());
-                    if(eElement.getAttributeNode("disc") !=  null )
-                        disc.setType(eElement.getAttributeNode("disc").toString());
-                    else
-                        disc.setType("brak");
+                   try {
+                       disc.setType(eElement.getAttributeNode("discType").toString());
+                   }
+                   catch (NullPointerException e){
+                       e.printStackTrace();
+                   }
 
 
                     GraphicCard graphicCard = new GraphicCard(eElement.getElementsByTagName("gpuName").item(0).getTextContent(),eElement.getElementsByTagName("gpuMemory").item(0).getTextContent());
@@ -70,7 +73,7 @@ public class FileReader {
                         if (eElement.getAttribute("touch")== "tak")
                             touchScreen = true;
                         Screen screen = new Screen(eElement.getElementsByTagName("diagonal").item(0).getTextContent(), eElement.getElementsByTagName("resolution").item(0).getTextContent(), eElement.getElementsByTagName("screenType").item(0).getTextContent(), touchScreen);
-                        Laptop laptop = new Laptop(eElement.getElementsByTagName("brand").item(0).getTextContent(), eElement.getElementsByTagName("ramMemory").item(0).getTextContent(), processor, disc, screen, graphicCard, eElement.getElementsByTagName("cdDrive").item(0).getTextContent(), eElement.getElementsByTagName("operatingSystem").item(0).getTextContent());
+                        Laptop laptop = new Laptop(eElement.getElementsByTagName("brand").item(0).getTextContent(), eElement.getElementsByTagName("ramMemory").item(0).getTextContent(), processor, disc, screen, graphicCard, eElement.getElementsByTagName("operatingSystem").item(0).getTextContent() ,eElement.getElementsByTagName("cdDrive").item(0).getTextContent());
 
                     laptops.add(laptop);
                 }
@@ -80,23 +83,14 @@ public class FileReader {
         {
             e.printStackTrace();
         }
-        return laptops;
-    }
 
-
-    public String[] createLaptopsArray(ArrayList<Laptop> laptops){
-
-        ArrayList <String> laptopsArr = new ArrayList<>();
-        laptopsArr.toArray();
         for (Laptop l : laptops
-        ) {
-            laptopsArr.addAll(l.laptopToStringArray());
+             ) {
+            System.out.println(l.toString());
         }
 
-        return (String[])laptopsArr.toArray();
+        return laptops;
     }
-
-
 
 }
 

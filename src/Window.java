@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -10,13 +11,13 @@ import static java.awt.Component.LEFT_ALIGNMENT;
 
 public class Window {
 
-    public static ArrayList<Laptop> laptops;
 
-    public Window(ArrayList<Laptop> laptops) {
-        this.laptops = laptops;
+
+    public Window() {
+
     }
 
-    public static void welcomeScreen(ArrayList <Laptop> laptops) {
+    public static void welcomeScreen() {
         JFrame frame = new JFrame("Welcome screen");
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
@@ -28,7 +29,19 @@ public class Window {
 
         button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                File file = new File("data/data.txt");
+                FileReader fileReader = new FileReader();
+
+
+                ArrayList<String> txtLaptops = fileReader.readTxtFile(file);
+                ArrayList<Laptop> laptops = new ArrayList<>();
+
+                LaptopCreator laptopCreator = new LaptopCreator();
+                laptops = laptopCreator.createComputerSet(txtLaptops);
+
+
                 printTable(laptops);
+
             }
         });
 
@@ -36,6 +49,19 @@ public class Window {
 
         button2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                File file = new File("outputData.xml");
+                FileReader fileReader = new FileReader();
+
+                ArrayList<String> txtLaptops = new ArrayList<>();
+                ArrayList<Laptop> laptops = fileReader.readXmlFile(file);
+                for (Laptop l: laptops
+                ) {
+                    txtLaptops.add(l.laptopToStringLine());
+                }
+
+                LaptopCreator laptopCreator = new LaptopCreator();
+                laptops = laptopCreator.createComputerSet(txtLaptops);
+
                 printTable(laptops);
             }
         });

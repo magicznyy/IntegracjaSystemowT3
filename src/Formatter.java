@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -14,10 +15,13 @@ public class Formatter {
       File fortmattedFile = new File("formatted.txt");
       try{
           fortmattedFile.createNewFile();
+          PrintWriter pw = new PrintWriter("formatted.txt");
+          pw.close();
       }
         catch(Exception e){
             System.out.println("formatted tile creation problem");
         }
+
         String data = null;
         StringBuilder strb = new StringBuilder();
         int counter = 0;

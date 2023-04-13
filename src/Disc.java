@@ -4,8 +4,8 @@ public class Disc {
         private String type;
 
         public Disc(String capacity, String type) {
-                this.capacity = capacity;
                 this.type = type;
+                this.capacity = capacity;
         }
 
         public Disc() {

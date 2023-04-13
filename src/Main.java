@@ -16,12 +16,12 @@ public class Main {
         LaptopCreator laptopCreator = new LaptopCreator();
         laptops = laptopCreator.createComputerSet(txtLaptops);
 
-        Printer printer = new Printer();
-        printer.printTable(laptops);
-        printer.printQuantity(laptops);
+//        Printer printer = new Printer();
+//        printer.printTable(laptops);
+//        printer.printQuantity(laptops);
 
-        Window window = new Window(laptops);
-        window.welcomeScreen(laptops);
+        Window window = new Window();
+        window.welcomeScreen();
 
 
         for (Laptop l: fileReader.readXmlFile(file2)
